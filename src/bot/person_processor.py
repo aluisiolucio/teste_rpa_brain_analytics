@@ -1,7 +1,7 @@
 import time
 
 from bot.form_filler import fill_input_field, handle_hcaptcha
-from bot.error_handler import handle_error
+from bot.error_handler import handle_error, handle_error_anti_robot
 from entities.output_person import OutputPerson
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -20,7 +20,11 @@ def extract_output_person(driver):
     )
 
 
-def process_person(driver, input_person, sheet_output):
+def process_person(driver, input_person, sheet_output, attempts=0, max_attempts=3):
+    if attempts >= max_attempts:
+        print(f"Máximo de {max_attempts} tentativas atingido para CPF: {input_person.formatted_cpf()}")
+        return
+
     cpf = input_person.formatted_cpf()
     birth_date = input_person.formatted_birth_date()
 
@@ -37,6 +41,11 @@ def process_person(driver, input_person, sheet_output):
     )
     btn.send_keys(Keys.ENTER)
     time.sleep(3)
+
+    if handle_error_anti_robot(driver):
+        print(f"Tentativa {attempts + 1} para CPF: {input_person.formatted_cpf()}")
+        process_person(driver, input_person, sheet_output, attempts + 1)
+        return
 
     if handle_error(driver, sheet_output, input_person, '//*[@id="content-core"]/div/div/div[1]/span/h4/b', 'Data de Nascimento Inválida'):
         return

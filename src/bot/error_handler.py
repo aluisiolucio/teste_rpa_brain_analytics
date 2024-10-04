@@ -1,5 +1,10 @@
 from selenium.webdriver.common.by import By
 
+def handle_error_anti_robot(driver):
+    error_element = driver.find_elements(By.XPATH, '//*[@id="idMensagemErro"]/span')
+    
+    return error_element != []
+
 
 def handle_error(driver, sheet_output, input_person, error_xpath, error_message):
     error_element = driver.find_elements(By.XPATH, error_xpath)
