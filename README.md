@@ -19,8 +19,8 @@ Este projeto é um **teste técnico** para um freelancer em `Python`, desenvolvi
 
 1. **Clone o repositório**:
     ```bash
-    git clone 
-    cd 
+    git clone https://github.com/aluisiolucio/teste_rpa_brain_analytics.git
+    cd teste_rpa_brain_analytics
     ```
 
 2. **Crie e ative um ambiente virtual** (opcional, mas recomendado):
