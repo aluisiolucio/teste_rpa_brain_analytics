@@ -27,7 +27,7 @@ Este projeto é um **teste técnico** para um freelancer em `Python`, desenvolvi
     ```bash
     python -m venv .venv
     source .venv/bin/activate  # Linux/macOS
-    .venv\Scripts\activate  # Windows
+    .venv\Scripts\activate  # Windows (CMD)
     ```
 
 3. **Instale as dependências**:
@@ -62,7 +62,8 @@ src
    Após verificar se o arquivo de entrada `cpfDataNascimento.xlsx` está presente, execute o script principal:
 
    ```bash
-   python main.py
+   python src/main.py # Linux
+   python src\main.py # Windows
    ```
 
 3. **Acompanhe o progresso**:
